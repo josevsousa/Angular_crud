@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Icarro } from './carro';
 import { CarroService } from './carro.service';
 
 @Component({
@@ -25,4 +26,41 @@ export class AppComponent {
     .subscribe(carros => console.log(carros))
   }
   */
+
+  //----------------------------------------------------------
+
+  obterCarro(){
+    return this.carroService.obterCarro(2)
+      .subscribe(carro => console.log(carro))
+  }
+
+  //---------------------------------------------------------
+
+  addCarro(): void{
+    const carro: Icarro = {
+     marca: "ddd",
+     nome: "BMWW" 
+    };
+
+    this.carroService.addCarro(carro)
+      .subscribe(carro => console.log(carro))
+  }
+
+
+  atualizarCarro(): void{
+    const carro: Icarro = {
+      id: 1,
+      marca: "ddd",
+      nome: "LAM" 
+     };
+
+    this.carroService.atualizarCarro(carro)
+     .subscribe(carro => console.log(carro));
+  }
+
+  deleteCarro(){
+    this.carroService.deleteCarro(3)
+      .subscribe(res => console.log(res + "deletado"));
+  }
+
 }

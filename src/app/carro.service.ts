@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { API_PATH } from './environment';
+import { API_PATH } from './environments/environment';
 import { Icarro } from './carro';
 import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -34,5 +33,23 @@ export class CarroService {
     return this.httpClient.get<Icarro[]>(`${API_PATH}carros`);  
   }
   */
- 
+
+  //====================================================================
+
+  obterCarro(id: number): Observable<Icarro>{
+    return this.httpClient.get<Icarro>(`${API_PATH}carros/${id}`);
+  }
+
+  addCarro(carro: Icarro): Observable<Icarro>{
+    return this.httpClient.post<Icarro>(`${API_PATH}carros`, carro);
+  }
+
+  atualizarCarro(carro: Icarro): Observable<Icarro>{
+    return this.httpClient.put<Icarro>(`${API_PATH}carros/${carro.id}`, carro);
+  }
+   
+  deleteCarro(carroId: number): Observable<void>{
+    return this.httpClient.delete<void>(`${API_PATH}carros/${carroId}`)
+  }
+
 }
